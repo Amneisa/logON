@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>logOn</title>
+    <style>
+        body{
+            margin: 0;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        input{
+            outline:none;
+            border: none;
+        }
+        .top,.btm{
+            position: absolute;
+            width: 100%;
+            background-size: 100% 100%;
+            transition: 1s;
+        }
+        .top{
+            top: 0;
+            background-image: url('img/top.jpg');
+        }
+        
+        .mid{
+            position: absolute;
+            width: 100%;
+            height: 300px;
+            background: #34383D;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .mid>div{
+            width: 400px;
+            background: #1C1E21;
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .mid>div input{
+            width: 100%;
+            height: 30px;
+            font-size: 18px;
+            background: transparent;
+            color: #4F5561;
+            padding-left: 4px;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+        .mid>div .line{
+            height: 4px;
+            width: 100%;
+            background: #31353A;
+        }
+        .mid i{
+            width: 80px;
+            height: 80px;
+            margin-left: -45px;
+            border-radius: 50%;
+            border: 10px solid #31353A;
+            background: url('img/333.svg') no-repeat center center #1C1E21;
+            cursor: pointer;
+        }
+        .btm{
+            background-image: url('img/btm.jpg');
+        }
+        .top div,.btm div{
+            position: absolute;
+            width: 46px;
+            height: 46px;
+            left: calc( 50% - 23px );
+        }
+        @keyframes qaq{
+            from {bottom:0px;}
+            to {bottom:6px;}
+        }
+        @keyframes qaq1{
+            from {top:0px;}
+            to {top:6px;}
+        }
+        .top div{
+            background: url('img/up.svg') no-repeat center center ;
+            transform: rotate(90deg);
+            bottom: 0;
+            /*animation: qaq .4s infinite alternate linear;*/
+        }
+        .btm div{
+            background: url('img/down.svg') no-repeat center center ;
+            transform: rotate(90deg);
+            top: 0;
+            /*animation: qaq1 .4s infinite alternate linear;*/
+        }
+        .button{
+            width: 16px; 
+            height: 16px;
+            background: #34383D;
+            border-radius: 50%;
+            position: absolute;
+            left: calc(50% - 8px);
+            outline:none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            function WWW(){
+                var cH = document.documentElement.clientHeight / 2;
+                document.querySelectorAll('.top,.btm').forEach(function(item){
+                    item.style.height = cH + 'px';
+                    if(item.className == 'btm'){
+                        item.style.top = cH + 'px';
+                    }
+                });
+                document.querySelector('.button').style.top = cH - 8 + 'px';
+                document.querySelector('.mid').style.top = cH - 150 + 'px';
+            }
+            WWW();
+            window.onresize = function(){
+                WWW();
+                document.querySelector('.top').style.top = 0;
+                document.querySelector('.top').style.boxShadow = '';
+                document.querySelector('.btm').style.boxShadow = '';
+                document.querySelector('.top div').style.display = 'block';
+                document.querySelector('.btm div').style.display = 'block';
+                document.querySelector('.button').style.display = 'block';
+            }
+            document.querySelector('.button').onmouseover = function(){
+                document.querySelector('.top div').style.animation = 'qaq .4s infinite alternate linear';
+                document.querySelector('.btm div').style.animation = 'qaq1 .4s infinite alternate linear';
+            }
+            document.querySelector('.button').onmouseout = function(){
+                document.querySelector('.top div').style.animation = '';
+                document.querySelector('.btm div').style.animation = '';
+            }
+            document.querySelector('.button').onclick = function(){
+                document.querySelector('.top div').style.display = 'none';
+                document.querySelector('.btm div').style.display = 'none'; 
+                this.style.display = 'none';
+                document.querySelector('.top').style.top = '-150px';
+                document.querySelector('.top').style.boxShadow = '0 1px 3px rgba(26, 26, 26, 0.5)';
+                document.querySelector('.btm').style.boxShadow = '0 1px 3px rgba(26, 26, 26, 0.5)';
+                document.querySelector('.btm').style.top = document.documentElement.clientHeight / 2 + 150 +'px';
+            }
+            //默认是错误的,算了有空在写
+            
+        }
+    </script>
+</head>
+<body>
+    <section class="top">
+        <div></div>
+    </section>
+    <section class="mid">
+        <div>
+            <form action="#">
+                <input type="text" placeholder="username">
+                <p class="line"></p>
+                <input type="password" placeholder="password">
+            </form>
+        </div>
+        <i></i>
+    </section>
+    <section class="btm">
+        <div></div>
+    </section>
+    <div class="button"></div>
+</body>
+</html>
